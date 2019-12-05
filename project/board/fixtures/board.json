@@ -1,0 +1,43 @@
+[
+  {
+    "model": "board.category",
+    "pk": 1,
+    "fields": {
+      "name": "event"
+    }
+  },
+  {
+    "model": "board.category",
+    "pk": 2,
+    "fields": {
+      "name": "notice"
+    }
+  },
+  {
+    "model": "board.notice",
+    "pk": 1,
+    "fields": {
+      "title": "event1",
+      "content": "event open",
+      "category": 1
+    }
+  },
+  {
+    "model": "board.notice",
+    "pk": 2,
+    "fields": {
+      "title": "event2",
+      "content": "event open",
+      "category": 2
+    }
+  },
+  {
+    "model": "board.notice",
+    "pk": 3,
+    "fields": {
+      "title": "notice",
+      "content": "notice warning",
+      "category": 2
+    }
+  }
+]

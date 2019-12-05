@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(BASE_DIR))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
+    'project.board',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'project.config.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'project.config.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project.wsgi.application'
+WSGI_APPLICATION = 'project.config.wsgi.application'
 
 
 # Database
@@ -75,8 +83,20 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_graphql',
+        'USER': 'root',
+        'PASSWORD': 'standard',
+        'HOST': '192.168.0.20',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET " +
+                            "sql_mode='STRICT_TRANS_TABLES'," +
+                            "MAX_EXECUTION_TIME=15000," +
+                            "character_set_connection=utf8," +
+                            "collation_connection=utf8_unicode_ci",
+            'connect_timeout': 30
+        }
     }
 }
 
